@@ -38,7 +38,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">NEW ARRIVALS 2024</div>
+          <div className="hero-badge">NEW ARRIVALS</div>
           <h1>Step Into <span className="gradient-text">Greatness</span></h1>
           <p>Discover the latest drops, iconic classics, and limited editions. Your next pair awaits.</p>
           <div className="hero-actions">
