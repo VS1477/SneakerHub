@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import SneakerViewer3D from '../components/SneakerViewer3D';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 import toast from 'react-hot-toast';
 import { FiStar, FiHeart, FiShoppingCart, FiMinus, FiPlus } from 'react-icons/fi';
 
@@ -90,16 +91,20 @@ export default function ProductDetail() {
           {activeTab === 'images' ? (
             <div className="image-gallery">
               <div className="main-image">
-                <img src={sneaker.images?.[activeImage] || 'https://via.placeholder.com/600'} alt={sneaker.name} />
+                <img
+                  src={getSneakerImage(sneaker.images, activeImage)}
+                  alt={sneaker.name}
+                  onError={useSneakerFallback}
+                />
               </div>
               <div className="image-thumbnails">
-                {sneaker.images?.map((img, i) => (
+                {(sneaker.images?.length ? sneaker.images : [null]).map((img, i) => (
                   <button
                     key={i}
                     className={`thumbnail ${activeImage === i ? 'active' : ''}`}
                     onClick={() => setActiveImage(i)}
                   >
-                    <img src={img} alt={`${sneaker.name} ${i + 1}`} />
+                    <img src={getSneakerImage(img)} alt={`${sneaker.name} ${i + 1}`} onError={useSneakerFallback} />
                   </button>
                 ))}
               </div>

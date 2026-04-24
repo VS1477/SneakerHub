@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import api from '../services/api';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 import toast from 'react-hot-toast';
 import { FiLock } from 'react-icons/fi';
 
@@ -130,7 +131,7 @@ export default function Checkout() {
           <div className="checkout-items">
             {cart.items.map(item => (
               <div key={item._id} className="checkout-item">
-                <img src={item.sneaker?.images?.[0] || 'https://via.placeholder.com/60'} alt="" />
+                <img src={getSneakerImage(item.sneaker?.images)} alt="" onError={useSneakerFallback} />
                 <div>
                   <p>{item.sneaker?.name}</p>
                   <span>Size {item.size} × {item.quantity}</span>

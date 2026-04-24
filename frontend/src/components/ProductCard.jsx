@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiHeart, FiStar } from 'react-icons/fi';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 
 export default function ProductCard({ sneaker, onWishlist }) {
   return (
@@ -7,9 +8,10 @@ export default function ProductCard({ sneaker, onWishlist }) {
       <Link to={`/product/${sneaker._id}`} className="product-card-link">
         <div className="product-card-image">
           <img
-            src={sneaker.images?.[0] || 'https://via.placeholder.com/400x400?text=Sneaker'}
+            src={getSneakerImage(sneaker.images)}
             alt={sneaker.name}
             loading="lazy"
+            onError={useSneakerFallback}
           />
           <div className="product-card-overlay">
             <span className="view-details">View Details</span>

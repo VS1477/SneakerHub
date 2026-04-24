@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 import { FiPlus, FiEdit2, FiTrash2, FiPackage, FiDollarSign, FiTrendingUp, FiShoppingBag } from 'react-icons/fi';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -273,7 +274,7 @@ export default function AdminDashboard() {
               <tbody>
                 {sneakers.map(s => (
                   <tr key={s._id}>
-                    <td><img src={s.images?.[0] || 'https://via.placeholder.com/40'} alt="" className="table-img" /></td>
+                    <td><img src={getSneakerImage(s.images)} alt="" className="table-img" onError={useSneakerFallback} /></td>
                     <td>{s.name}</td>
                     <td>{s.brand}</td>
                     <td>${s.price}</td>

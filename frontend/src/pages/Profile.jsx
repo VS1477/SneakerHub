@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 import { FiUser, FiPackage, FiHeart, FiClock } from 'react-icons/fi';
 
 export default function Profile() {
@@ -74,7 +75,7 @@ export default function Profile() {
                   <div className="order-items">
                     {order.products?.map((p, i) => (
                       <div key={i} className="order-item">
-                        <img src={p.image || 'https://via.placeholder.com/50'} alt={p.name} />
+                        <img src={getSneakerImage(p.image)} alt={p.name} onError={useSneakerFallback} />
                         <div>
                           <span>{p.name}</span>
                           <span className="order-item-details">Size {p.size} × {p.quantity}</span>

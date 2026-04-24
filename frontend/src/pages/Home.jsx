@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { useSneakerFallback } from '../utils/sneakerImage';
 import { FiArrowRight, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi';
 
 export default function Home() {
@@ -68,6 +69,7 @@ export default function Home() {
             <img
               src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600"
               alt="Featured Sneaker"
+              onError={useSneakerFallback}
             />
           </div>
         </div>

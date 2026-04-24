@@ -2,6 +2,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { FiTrash2, FiMinus, FiPlus, FiShoppingBag } from 'react-icons/fi';
+import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
 
 export default function Cart() {
   const { cart, cartCount, updateQuantity, removeFromCart } = useCart();
@@ -37,8 +38,9 @@ export default function Cart() {
             <div key={item._id} className="cart-item">
               <div className="cart-item-image">
                 <img
-                  src={item.sneaker?.images?.[0] || 'https://via.placeholder.com/120'}
+                  src={getSneakerImage(item.sneaker?.images)}
                   alt={item.sneaker?.name || 'Sneaker'}
+                  onError={useSneakerFallback}
                 />
               </div>
               <div className="cart-item-info">
