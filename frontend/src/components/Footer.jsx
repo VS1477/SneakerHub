@@ -9,10 +9,10 @@ export default function Footer() {
           <h3><span className="logo-icon">👟</span> SNEAKER<span className="logo-accent">HUB</span></h3>
           <p>Your ultimate destination for premium sneakers. Discover the latest drops and iconic classics.</p>
           <div className="footer-socials">
-            <a href="#" aria-label="Instagram"><FiInstagram /></a>
-            <a href="#" aria-label="Twitter"><FiTwitter /></a>
-            <a href="#" aria-label="Facebook"><FiFacebook /></a>
-            <a href="#" aria-label="YouTube"><FiYoutube /></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FiInstagram /></a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><FiTwitter /></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FiFacebook /></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FiYoutube /></a>
           </div>
         </div>
         <div className="footer-section">
