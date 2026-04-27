@@ -11,6 +11,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Root endpoint for direct browser visits to the backend service.
+app.get('/', (req, res) => {
+  res.json({
+    name: 'SneakerHub API',
+    status: 'ok',
+    health: '/api/health'
+  });
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
+
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/sneakers', require('./routes/sneakerRoutes'));
@@ -20,6 +33,10 @@ app.use('/api/orders', require('./routes/orderRoutes'));
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
 });
 
 // Error handler
