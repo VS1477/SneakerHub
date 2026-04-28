@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 import { FiPlus, FiEdit2, FiTrash2, FiPackage, FiDollarSign, FiTrendingUp, FiShoppingBag } from 'react-icons/fi';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -109,7 +110,7 @@ export default function AdminDashboard() {
   const revenueChartData = analytics ? {
     labels: analytics.monthlyData.map(m => m.month),
     datasets: [{
-      label: 'Revenue ($)',
+      label: 'Revenue (Rs.)',
       data: analytics.monthlyData.map(m => m.revenue),
       backgroundColor: 'rgba(233, 69, 96, 0.8)',
       borderRadius: 8
@@ -156,7 +157,7 @@ export default function AdminDashboard() {
             <div className="stat-card">
               <FiDollarSign className="stat-icon revenue" />
               <div>
-                <h3>${analytics.totalRevenue?.toFixed(2)}</h3>
+                <h3>{formatCurrency(analytics.totalRevenue)}</h3>
                 <p>Total Revenue</p>
               </div>
             </div>
@@ -214,7 +215,7 @@ export default function AdminDashboard() {
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Price ($)</label>
+                  <label>Price (Rs.)</label>
                   <input type="number" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })} required />
                 </div>
                 <div className="form-group">
@@ -277,7 +278,7 @@ export default function AdminDashboard() {
                     <td><img src={getSneakerImage(s.images)} alt="" className="table-img" onError={useSneakerFallback} /></td>
                     <td>{s.name}</td>
                     <td>{s.brand}</td>
-                    <td>${s.price}</td>
+                    <td>{formatCurrency(s.price)}</td>
                     <td><span className={`stock-tag ${s.stock < 10 ? 'low' : ''}`}>{s.stock}</span></td>
                     <td>{s.rating?.toFixed(1)}</td>
                     <td className="actions-cell">
@@ -313,7 +314,7 @@ export default function AdminDashboard() {
                   <tr key={order._id}>
                     <td>#{order._id.slice(-8)}</td>
                     <td>{order.user?.name || 'N/A'}</td>
-                    <td>${order.totalPrice?.toFixed(2)}</td>
+                    <td>{formatCurrency(order.totalPrice)}</td>
                     <td><span className={`status-badge payment-${order.paymentStatus}`}>{order.paymentStatus}</span></td>
                     <td><span className={`status-badge ${order.orderStatus}`}>{order.orderStatus}</span></td>
                     <td>{new Date(order.createdAt).toLocaleDateString()}</td>

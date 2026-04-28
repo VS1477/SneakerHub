@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import api from '../services/api';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 import toast from 'react-hot-toast';
 import { FiLock } from 'react-icons/fi';
 
@@ -122,7 +123,7 @@ export default function Checkout() {
           </div>
 
           <button type="submit" className="btn btn-primary btn-lg place-order-btn" disabled={loading}>
-            {loading ? 'Processing...' : `Place Order — $${total.toFixed(2)}`}
+            {loading ? 'Processing...' : `Place Order - ${formatCurrency(total)}`}
           </button>
         </form>
 
@@ -136,16 +137,16 @@ export default function Checkout() {
                   <p>{item.sneaker?.name}</p>
                   <span>Size {item.size} × {item.quantity}</span>
                 </div>
-                <span>${((item.sneaker?.price || 0) * item.quantity).toFixed(2)}</span>
+                <span>{formatCurrency((item.sneaker?.price || 0) * item.quantity)}</span>
               </div>
             ))}
           </div>
           <div className="summary-divider"></div>
-          <div className="summary-row"><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></div>
-          <div className="summary-row"><span>Shipping</span><span>{shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`}</span></div>
-          <div className="summary-row"><span>Tax</span><span>${tax.toFixed(2)}</span></div>
+          <div className="summary-row"><span>Subtotal</span><span>{formatCurrency(subtotal)}</span></div>
+          <div className="summary-row"><span>Shipping</span><span>{shippingCost === 0 ? 'FREE' : formatCurrency(shippingCost)}</span></div>
+          <div className="summary-row"><span>Tax</span><span>{formatCurrency(tax)}</span></div>
           <div className="summary-divider"></div>
-          <div className="summary-row total"><span>Total</span><span>${total.toFixed(2)}</span></div>
+          <div className="summary-row total"><span>Total</span><span>{formatCurrency(total)}</span></div>
         </div>
       </div>
     </div>

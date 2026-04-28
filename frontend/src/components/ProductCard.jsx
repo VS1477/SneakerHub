@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FiHeart, FiStar } from 'react-icons/fi';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 
 export default function ProductCard({ sneaker, onWishlist }) {
   return (
@@ -27,7 +28,7 @@ export default function ProductCard({ sneaker, onWishlist }) {
         <span className="product-brand">{sneaker.brand}</span>
         <h3 className="product-name">{sneaker.name}</h3>
         <div className="product-card-bottom">
-          <span className="product-price">${sneaker.price}</span>
+          <span className="product-price">{formatCurrency(sneaker.price)}</span>
           <div className="product-rating">
             <FiStar className="star-icon" />
             <span>{sneaker.rating?.toFixed(1)}</span>

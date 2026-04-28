@@ -4,6 +4,7 @@ import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
 import { useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 import { FiArrowRight, FiTruck, FiShield, FiRefreshCw } from 'react-icons/fi';
 
 export default function Home() {
@@ -115,7 +116,7 @@ export default function Home() {
         <div className="feature-card">
           <FiTruck className="feature-icon" />
           <h3>Free Shipping</h3>
-          <p>On orders over $100</p>
+          <p>On orders over {formatCurrency(100)}</p>
         </div>
         <div className="feature-card">
           <FiShield className="feature-icon" />

@@ -1,5 +1,6 @@
 import { useLocation, Link } from 'react-router-dom';
 import { FiCheckCircle, FiPackage } from 'react-icons/fi';
+import { formatCurrency } from '../utils/currency';
 
 export default function OrderConfirmation() {
   const location = useLocation();
@@ -19,7 +20,7 @@ export default function OrderConfirmation() {
               <span>Order ID: {order._id}</span>
             </div>
             <div className="order-total">
-              <span>Total: ${order.totalPrice?.toFixed(2)}</span>
+              <span>Total: {formatCurrency(order.totalPrice)}</span>
             </div>
           </div>
         )}

@@ -6,6 +6,7 @@ import api from '../services/api';
 import SneakerViewer3D from '../components/SneakerViewer3D';
 import SkeletonLoader from '../components/SkeletonLoader';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 import toast from 'react-hot-toast';
 import { FiStar, FiHeart, FiShoppingCart, FiMinus, FiPlus } from 'react-icons/fi';
 
@@ -128,7 +129,7 @@ export default function ProductDetail() {
             <span>{sneaker.rating?.toFixed(1)} ({sneaker.numReviews} reviews)</span>
           </div>
 
-          <div className="product-price-tag">${sneaker.price}</div>
+          <div className="product-price-tag">{formatCurrency(sneaker.price)}</div>
 
           <p className="product-description">{sneaker.description}</p>
 

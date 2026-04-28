@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { FiTrash2, FiMinus, FiPlus, FiShoppingBag } from 'react-icons/fi';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 
 export default function Cart() {
   const { cart, cartCount, updateQuantity, removeFromCart } = useCart();
@@ -58,7 +59,7 @@ export default function Cart() {
                 </button>
               </div>
               <div className="cart-item-price">
-                ${((item.sneaker?.price || 0) * item.quantity).toFixed(2)}
+                {formatCurrency((item.sneaker?.price || 0) * item.quantity)}
               </div>
               <button className="cart-item-remove" onClick={() => removeFromCart(item._id)}>
                 <FiTrash2 />
@@ -71,19 +72,19 @@ export default function Cart() {
           <h3>Order Summary</h3>
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>{formatCurrency(subtotal)}</span>
           </div>
           <div className="summary-row">
             <span>Shipping</span>
-            <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+            <span>{shipping === 0 ? 'FREE' : formatCurrency(shipping)}</span>
           </div>
           <div className="summary-divider"></div>
           <div className="summary-row total">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>{formatCurrency(total)}</span>
           </div>
           {subtotal < 100 && (
-            <p className="free-shipping-hint">Add ${(100 - subtotal).toFixed(2)} more for free shipping!</p>
+            <p className="free-shipping-hint">Add {formatCurrency(100 - subtotal)} more for free shipping!</p>
           )}
           <Link
             to={user ? '/checkout' : '/login'}

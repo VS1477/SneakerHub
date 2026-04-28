@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import ProductCard from '../components/ProductCard';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { formatCurrency } from '../utils/currency';
 import { FiSearch, FiFilter, FiX } from 'react-icons/fi';
 
 export default function Shop() {
@@ -138,8 +139,8 @@ export default function Shop() {
                 onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
               />
               <div className="price-labels">
-                <span>${priceRange[0]}</span>
-                <span>${priceRange[1]}</span>
+                <span>{formatCurrency(priceRange[0])}</span>
+                <span>{formatCurrency(priceRange[1])}</span>
               </div>
             </div>
           </div>

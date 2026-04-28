@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import { getSneakerImage, useSneakerFallback } from '../utils/sneakerImage';
+import { formatCurrency } from '../utils/currency';
 import { FiUser, FiPackage, FiHeart, FiClock } from 'react-icons/fi';
 
 export default function Profile() {
@@ -80,12 +81,12 @@ export default function Profile() {
                           <span>{p.name}</span>
                           <span className="order-item-details">Size {p.size} × {p.quantity}</span>
                         </div>
-                        <span className="order-item-price">${(p.price * p.quantity).toFixed(2)}</span>
+                        <span className="order-item-price">{formatCurrency(p.price * p.quantity)}</span>
                       </div>
                     ))}
                   </div>
                   <div className="order-total">
-                    <span>Total: ${order.totalPrice?.toFixed(2)}</span>
+                    <span>Total: {formatCurrency(order.totalPrice)}</span>
                   </div>
                 </div>
               ))
